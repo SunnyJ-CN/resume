@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Github, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import {
   computed,
   education,
@@ -20,6 +21,8 @@ async function copyWechatAndOpen() {
 
   window.location.href = "weixin://";
 }
+
+const iconSize = 15;
 
 function Section({
   title,
@@ -50,15 +53,26 @@ function App() {
             </p>
           </div>
           <address className="contact" id="contact">
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
-            <a href={`tel:${profile.phone}`}>{profile.phone}</a>
+            <a href={`mailto:${profile.email}`}>
+              <Mail size={iconSize} aria-hidden="true" />
+              {profile.email}
+            </a>
+            <a href={`tel:${profile.phone}`}>
+              <Phone size={iconSize} aria-hidden="true" />
+              {profile.phone}
+            </a>
             <button type="button" onClick={copyWechatAndOpen}>
+              <MessageCircle size={iconSize} aria-hidden="true" />
               微信：{profile.wechat}
             </button>
             <a href={profile.github} target="_blank" rel="noreferrer">
+              <Github size={iconSize} aria-hidden="true" />
               github.com/SunnyJ-CN
             </a>
-            <span>{profile.location}</span>
+            <span>
+              <MapPin size={iconSize} aria-hidden="true" />
+              {profile.location}
+            </span>
           </address>
         </header>
 
@@ -71,11 +85,7 @@ function App() {
         </Section>
 
         <Section title="专业技能">
-          <div className="skills-list">
-            {skills.map((skill) => (
-              <span key={skill}>{skill}</span>
-            ))}
-          </div>
+          <p className="skills-line">{skills.join(" / ")}</p>
         </Section>
 
         <Section title="工作经历">
@@ -105,16 +115,19 @@ function App() {
               <section className="entry project" key={project.name}>
                 <div className="entry-title">
                   <div>
-                    <h3>{project.name}</h3>
+                    <h3>
+                      {project.appStore ? (
+                        <a href={project.appStore} target="_blank" rel="noreferrer">
+                          {project.name}
+                        </a>
+                      ) : (
+                        project.name
+                      )}
+                    </h3>
                     <p>{project.role}</p>
                   </div>
                   <div className="entry-meta">
                     <time>{project.period}</time>
-                    {project.appStore ? (
-                      <a href={project.appStore} target="_blank" rel="noreferrer">
-                        App Store
-                      </a>
-                    ) : null}
                   </div>
                 </div>
                 <p className="project-summary">{project.summary}</p>

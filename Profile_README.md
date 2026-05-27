@@ -5,7 +5,12 @@
 
 Hi, I'm **姬向阳**, an iOS developer focused on Swift, vehicle-connected apps, BLE, WebRTC, and practical mobile engineering.
 
+**↓↓ 点此查看在线简历**
+
 [![Resume](https://img.shields.io/badge/Resume-GitHub%20Pages-204C43?style=flat-square&logo=githubpages&logoColor=white)](https://sunnyj-cn.github.io/resume/)
+
+**↓↓ 点此向我发送邮件**
+
 [![Email](https://img.shields.io/badge/Email-jxy800q%40hotmail.com-2E7C69?style=flat-square&logo=maildotru&logoColor=white)](mailto:jxy800q@hotmail.com)
 
 ## Tech Stack
