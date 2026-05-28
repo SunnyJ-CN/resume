@@ -53,7 +53,7 @@ button:disabled {
 .resume-toolbar {
   display: flex;
   justify-content: flex-end;
-  width: min(980px, 100%);
+  width: min(796px, 100%);
   margin: 0 auto 10px;
 }
 
@@ -76,9 +76,9 @@ button:disabled {
 }
 
 .resume-sheet {
-  width: min(980px, 100%);
+  width: min(796px, 100%);
   margin: 0 auto;
-  padding: 42px 48px 46px;
+  padding: 72px 74px 76px;
   border: 1px solid #d9dee5;
   background: #ffffff;
   box-shadow: 0 12px 32px rgba(31, 41, 51, 0.08);
@@ -246,34 +246,32 @@ li {
   margin-top: -2px;
 }
 
-.pdf-exporting {
+.pdf-export-host {
+  position: fixed;
+  top: 0;
+  left: -12000px;
+  width: 720px;
   background: #ffffff;
+  pointer-events: none;
 }
 
-.pdf-exporting .resume-toolbar {
-  display: none;
-}
-
-.pdf-exporting .resume-page {
-  padding: 0;
-  background: #ffffff;
-}
-
-.pdf-exporting .resume-sheet {
-  width: 980px;
+.pdf-export-sheet {
+  width: 720px;
+  margin: 0;
+  padding: 34px 36px 38px;
   border: 0;
   box-shadow: none;
 }
 
-.pdf-exporting .resume-section,
-.pdf-exporting .entry,
-.pdf-exporting .project {
+.pdf-export-sheet .resume-section,
+.pdf-export-sheet .entry,
+.pdf-export-sheet .project {
   break-inside: auto;
   page-break-inside: auto;
 }
 
-.pdf-exporting .entry-title,
-.pdf-exporting .resume-section h2 {
+.pdf-export-sheet .entry-title,
+.pdf-export-sheet .resume-section h2 {
   break-after: avoid;
   page-break-after: avoid;
 }

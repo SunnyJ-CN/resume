@@ -40,6 +40,18 @@ function formatPdfDate(date: Date) {
   return `${year}${month}${day}`;
 }
 
+function createPdfSource(source: HTMLElement) {
+  const host = document.createElement("div");
+  const clone = source.cloneNode(true) as HTMLElement;
+
+  host.className = "pdf-export-host";
+  clone.classList.add("pdf-export-sheet");
+  host.appendChild(clone);
+  document.body.appendChild(host);
+
+  return { host, clone };
+}
+
 function Section({
   title,
   children,
@@ -66,7 +78,7 @@ function App() {
     }
 
     setIsDownloading(true);
-    document.body.classList.add("pdf-exporting");
+    const { host, clone } = createPdfSource(resume);
 
     try {
       const html2pdfModule = await import("html2pdf.js");
@@ -76,7 +88,7 @@ function App() {
       await html2pdf()
         .set({
           filename: fileName,
-          margin: [8, 8, 8, 8],
+          margin: [10, 10, 10, 10],
           image: { type: "jpeg", quality: 0.98 },
           html2canvas: {
             scale: 2,
@@ -90,10 +102,10 @@ function App() {
           },
           pagebreak: { mode: ["css", "legacy"] },
         })
-        .from(resume)
+        .from(clone)
         .save();
     } finally {
-      document.body.classList.remove("pdf-exporting");
+      host.remove();
       setIsDownloading(false);
     }
   }
