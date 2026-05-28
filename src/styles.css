@@ -188,7 +188,7 @@ li {
 }
 
 .entry {
-  break-inside: avoid;
+  break-inside: auto;
 }
 
 .entry-title {
@@ -244,6 +244,38 @@ li {
 
 .compact-entry {
   margin-top: -2px;
+}
+
+.pdf-exporting {
+  background: #ffffff;
+}
+
+.pdf-exporting .resume-toolbar {
+  display: none;
+}
+
+.pdf-exporting .resume-page {
+  padding: 0;
+  background: #ffffff;
+}
+
+.pdf-exporting .resume-sheet {
+  width: 980px;
+  border: 0;
+  box-shadow: none;
+}
+
+.pdf-exporting .resume-section,
+.pdf-exporting .entry,
+.pdf-exporting .project {
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+.pdf-exporting .entry-title,
+.pdf-exporting .resume-section h2 {
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 @media print {

@@ -66,6 +66,7 @@ function App() {
     }
 
     setIsDownloading(true);
+    document.body.classList.add("pdf-exporting");
 
     try {
       const html2pdfModule = await import("html2pdf.js");
@@ -92,6 +93,7 @@ function App() {
         .from(resume)
         .save();
     } finally {
+      document.body.classList.remove("pdf-exporting");
       setIsDownloading(false);
     }
   }
