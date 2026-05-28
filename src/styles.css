@@ -41,8 +41,38 @@ button:hover {
   text-decoration: underline;
 }
 
+button:disabled {
+  cursor: wait;
+  opacity: 0.64;
+}
+
 .resume-page {
   padding: 32px 18px;
+}
+
+.resume-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  width: min(980px, 100%);
+  margin: 0 auto 10px;
+}
+
+.resume-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #cfd6df;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #1f2933;
+  font-size: 13px;
+}
+
+.resume-toolbar button:hover {
+  background: #f8fafc;
+  text-decoration: none;
 }
 
 .resume-sheet {
@@ -225,6 +255,10 @@ li {
     padding: 0;
   }
 
+  .resume-toolbar {
+    display: none;
+  }
+
   .resume-sheet {
     width: 100%;
     padding: 0;
@@ -241,6 +275,11 @@ li {
 @media (max-width: 720px) {
   .resume-page {
     padding: 0;
+  }
+
+  .resume-toolbar {
+    margin: 12px auto;
+    padding: 0 20px;
   }
 
   .resume-sheet {

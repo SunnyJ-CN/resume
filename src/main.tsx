@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Github, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Download, Github, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import {
   computed,
   education,
@@ -24,6 +24,22 @@ async function copyWechatAndOpen() {
 
 const iconSize = 15;
 
+type Html2PdfWorker = {
+  set: (options: unknown) => Html2PdfWorker;
+  from: (source: HTMLElement) => Html2PdfWorker;
+  save: () => Promise<void>;
+};
+
+type Html2PdfFactory = () => Html2PdfWorker;
+
+function formatPdfDate(date: Date) {
+  const year = String(date.getFullYear()).slice(-2);
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}${month}${day}`;
+}
+
 function Section({
   title,
   children,
@@ -40,8 +56,55 @@ function Section({
 }
 
 function App() {
+  const [isDownloading, setIsDownloading] = React.useState(false);
+
+  async function downloadPdf() {
+    const resume = document.querySelector<HTMLElement>(".resume-sheet");
+
+    if (!resume || isDownloading) {
+      return;
+    }
+
+    setIsDownloading(true);
+
+    try {
+      const html2pdfModule = await import("html2pdf.js");
+      const html2pdf = html2pdfModule.default as Html2PdfFactory;
+      const fileName = `姬向阳-iOS开发工程师 ${formatPdfDate(new Date())}.pdf`;
+
+      await html2pdf()
+        .set({
+          filename: fileName,
+          margin: [8, 8, 8, 8],
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: "#ffffff",
+          },
+          jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait",
+          },
+          pagebreak: { mode: ["css", "legacy"] },
+        })
+        .from(resume)
+        .save();
+    } finally {
+      setIsDownloading(false);
+    }
+  }
+
   return (
     <main className="resume-page">
+      <div className="resume-toolbar" aria-label="简历操作">
+        <button type="button" onClick={downloadPdf} disabled={isDownloading}>
+          <Download size={15} aria-hidden="true" />
+          {isDownloading ? "正在生成 PDF..." : "下载 PDF"}
+        </button>
+      </div>
+
       <article className="resume-sheet">
         <header className="resume-header">
           <div>
